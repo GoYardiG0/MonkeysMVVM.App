@@ -4,9 +4,9 @@ namespace MonkeysMVVM.Views;
 
 public partial class ShowMonkeysByLocationView : ContentPage
 {
-	public ShowMonkeysByLocationView()
+	public ShowMonkeysByLocationView(ShowMonkeysByLocationViewModel vm)
 	{
 		InitializeComponent();
-		this.BindingContext = new ShowMonkeysByLocationViewModel();
+		this.BindingContext = vm;
 	}
 }

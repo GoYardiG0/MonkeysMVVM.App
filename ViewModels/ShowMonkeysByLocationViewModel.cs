@@ -6,12 +6,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MonkeysMVVM.ViewModels
 {
     public class ShowMonkeysByLocationViewModel : ViewModelBase
     {
         private string name;
+        
         public string Name
         {
             get { return this.name; }
@@ -82,5 +84,38 @@ namespace MonkeysMVVM.ViewModels
             
         }
 
+    
+        #region Single Selection
+        private Object selectedMonkey;
+        public Object SelectedMonkey
+        {
+            get
+            {
+                return this.selectedMonkey;
+            }
+            set
+            {
+                this.selectedMonkey = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand SingleSelectCommand => new Command(OnSingleSelectMonkey);
+
+        async void OnSingleSelectMonkey()
+        {
+            if (SelectedMonkey != null)
+            {
+                var navParam = new Dictionary<string, object>()
+                {
+                    { "selectedMonkey",SelectedMonkey }
+                };
+                await Shell.Current.GoToAsync($"monkeyDetails", navParam);
+                SelectedMonkey = null;
+            }
+        }
+
+
+        #endregion
     }
 }

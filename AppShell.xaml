@@ -4,11 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MonkeysMVVM"
+    xmlns:views="clr-namespace:MonkeysMVVM.Views"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Monkeys"
+        ContentTemplate="{DataTemplate views:ShowMonkeysByLocationView}"
+        Route="Monkeys" />
 
 </Shell>

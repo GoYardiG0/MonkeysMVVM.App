@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MonkeysMVVM.ViewModels
 {
+    [QueryProperty(nameof(SelectedMonkey), "selectedMonkey")]
     public class ShowMonkeyViewModel:INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
@@ -21,7 +22,16 @@ namespace MonkeysMVVM.ViewModels
         }
 
         #endregion
-
+        private Monkey selectedMonkey;
+        public Monkey SelectedMonkey
+        {
+            get { return selectedMonkey; }
+            set
+            {
+                this.selectedMonkey = value;
+                OnPropertyChanged();
+            }
+        }
         private string name;
         public string Name 
         { 
@@ -59,7 +69,7 @@ namespace MonkeysMVVM.ViewModels
         public ShowMonkeyViewModel()
         {
             GetMonkeyCommand = new Command(GetMonkey);
-
+            
             GetMonkey();
         }
 
