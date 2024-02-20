@@ -15,7 +15,7 @@ namespace MonkeysMVVM.Services
             this.Monkeys = new List<Monkey>();
             FillList();
         }
-
+        
         private void FillList()
         {
 
@@ -184,6 +184,10 @@ namespace MonkeysMVVM.Services
         public async Task<List<Monkey>> GetMonkeysByLocation(string location)
         {
             return monkeys.Where(m => m.Location == location).ToList();
+        }
+        public async Task<List<Monkey>> GetMonkeys()
+        {
+            return monkeys;
         }
     }
 }

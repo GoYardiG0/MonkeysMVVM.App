@@ -5,14 +5,18 @@
              Title="ShowMonkeyView">
     <VerticalStackLayout>
         <Label 
-            Text="{Binding Name}"
+            Text="{Binding SelectedMonkey.Name}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Label 
-            Text="{Binding Location}"
+            Text="{Binding SelectedMonkey.Location}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Image Source="{Binding ImageUrl}" HeightRequest="200"></Image>
+        <Label 
+    Text="{Binding SelectedMonkey.Details}"
+    VerticalOptions="Center" 
+    HorizontalOptions="Center" />
+        <Image Source="{Binding SelectedMonkey.ImageUrl}" HeightRequest="200"></Image>
         <Button Text="Get Monkey" Command="{Binding GetMonkeyCommand}"></Button>
 
     </VerticalStackLayout>

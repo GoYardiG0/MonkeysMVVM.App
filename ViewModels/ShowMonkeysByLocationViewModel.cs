@@ -2,6 +2,7 @@
 using MonkeysMVVM.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,19 @@ namespace MonkeysMVVM.ViewModels
     public class ShowMonkeysByLocationViewModel : ViewModelBase
     {
         private string name;
-        
+        private ObservableCollection<Monkey> monkeys;
+        public ObservableCollection<Monkey> Monkeys
+        {
+            get
+            {
+                return this.monkeys;
+            }
+            set
+            {
+                this.monkeys = value;
+                OnPropertyChanged();
+            }
+        }
         public string Name
         {
             get { return this.name; }
@@ -55,14 +68,22 @@ namespace MonkeysMVVM.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        private MonkeysService monkeysService;
         public Command GetMonkeyCommand { get; set; }
 
-        public ShowMonkeysByLocationViewModel()
+        public ShowMonkeysByLocationViewModel(MonkeysService service)
         {
             GetMonkeyCommand = new Command(GetMonkey);
+            monkeys = new ObservableCollection<Monkey>();
+            monkeysService = service;
+            ReadMonkeys();
+        }
 
-            
+        private async void ReadMonkeys()
+        {
+            MonkeysService service = this.monkeysService;
+            List<Monkey> list = await service.GetMonkeys();
+            this.monkeys = new ObservableCollection<Monkey>(list);
         }
 
         private async void GetMonkey()
